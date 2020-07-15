@@ -31,7 +31,7 @@ public class SwaggerDemoApplication extends SpringBootServletInitializer{
 	
 
 	
-	//Test
+	//Test-----------
 	//@TestPropertySource(locations = "classpath:application.properties")
 	
 	public static void main(String[] args) {
