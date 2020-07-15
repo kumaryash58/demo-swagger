@@ -1,40 +1,23 @@
 package com.techment.SwaggerDemo;
 
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import com.google.common.base.Predicate;
-
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static com.google.common.base.Predicates.or;
-import static springfox.documentation.builders.PathSelectors.any;
-import static springfox.documentation.builders.PathSelectors.regex;
 
 
 @SpringBootApplication
 @EnableSwagger2
-public class SwaggerDemoApplication {
+@EnableAutoConfiguration
+@ComponentScan()
+public class SwaggerDemoApplication extends SpringBootServletInitializer{
 
 //	@Bean
 //	public Docket docket() {
@@ -48,13 +31,23 @@ public class SwaggerDemoApplication {
 	
 
 	
-	
+	//Test
 	//@TestPropertySource(locations = "classpath:application.properties")
 	
 	public static void main(String[] args) {
-		SpringApplication.run(SwaggerDemoApplication.class, args);
-		
-		
+		SpringApplication.run(applicationClass, args);
 	}
+	
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(applicationClass);
+    }
+	
+	private static Class<SwaggerDemoApplication> applicationClass = SwaggerDemoApplication.class;
+	
+	   @RequestMapping("/")
+	    public String home(){
+	        return "index";
+	    }
 
 }
